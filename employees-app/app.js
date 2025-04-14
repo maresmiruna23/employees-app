@@ -7,12 +7,14 @@ var mysql = require('mysql2');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+require('dotenv').config();
+
 var app = express();
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Marmota99@',
-  database: 'employee_management'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 connection.connect((err) => {
   if (err) {
@@ -22,7 +24,7 @@ connection.connect((err) => {
   console.log('Connected to MySQL DB as ID', connection.threadId);
 });
 app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+  console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
