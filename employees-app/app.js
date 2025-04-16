@@ -6,23 +6,12 @@ var logger = require('morgan');
 var mysql = require('mysql2');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var employeesRouter=require('./routes/employees');
 
 require('dotenv').config();
 
 var app = express();
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to DB:', err.stack);
-    return;
-  }
-  console.log('Connected to MySQL DB as ID', connection.threadId);
-});
+
 app.listen(3000, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
@@ -38,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/employees', employeesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,3 +46,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
