@@ -7,12 +7,13 @@ var mysql = require('mysql2');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var employeesRouter=require('./routes/employees');
+var departmentsRouter = require('./routes/departments');
 
 require('dotenv').config();
 
 var app = express();
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
 // view engine setup
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/employees', employeesRouter);
+app.use('/departments', departmentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
