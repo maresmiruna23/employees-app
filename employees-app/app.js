@@ -10,6 +10,8 @@ var employeesRouter=require('./routes/employees');
 var departmentsRouter = require('./routes/departments');
 var positionsRouter=require('./routes/positions');
 var reviewsRouter=require('./routes/performances');
+var locationsRouter=require('./routes/locations');
+var benefitsRouter=require('./routes/benefits');
 require('dotenv').config();
 
 var app = express();
@@ -33,6 +35,8 @@ app.use('/employees', employeesRouter);
 app.use('/departments', departmentsRouter);
 app.use('/positions', positionsRouter);
 app.use('/reviews', reviewsRouter);
+app.use('/locations', locationsRouter);
+app.use('/benefits', benefitsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
